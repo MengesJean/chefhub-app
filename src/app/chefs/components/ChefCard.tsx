@@ -6,8 +6,6 @@ interface ChefCardProps {
 }
 
 export function ChefCard({ chef }: ChefCardProps) {
-  const initials = `${chef.firstname.charAt(0)}${chef.lastname.charAt(0)}`;
-
   // Fonction pour afficher les étoiles
   const renderStars = (rating: number) => {
     const stars = [];
@@ -50,18 +48,12 @@ export function ChefCard({ chef }: ChefCardProps) {
       <div className="space-y-4">
         {/* Header avec avatar et nom */}
         <div className="flex items-center space-x-4">
-          <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-medium overflow-hidden">
-            {chef.profile_image_url ? (
-              <img
-                src={chef.profile_image_url}
-                alt={`${chef.firstname} ${chef.lastname}`}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-blue-500 flex items-center justify-center">
-                <span className="text-lg">{initials}</span>
-              </div>
-            )}
+          <div className="w-12 h-12 rounded-full overflow-hidden">
+            <img
+              src={chef.profile_image_url}
+              alt={`${chef.firstname} ${chef.lastname}`}
+              className="w-full h-full object-cover"
+            />
           </div>
 
           <div className="flex-1">

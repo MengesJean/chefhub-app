@@ -5,8 +5,6 @@ interface ChefProfileHeaderProps {
 }
 
 export function ChefProfileHeader({ chef }: ChefProfileHeaderProps) {
-  const initials = `${chef.firstname.charAt(0)}${chef.lastname.charAt(0)}`;
-
   // Fonction pour afficher les étoiles
   const renderStars = (rating: number) => {
     const stars = [];
@@ -46,18 +44,12 @@ export function ChefProfileHeader({ chef }: ChefProfileHeaderProps) {
       <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
         {/* Avatar */}
         <div className="flex-shrink-0">
-          <div className="w-32 h-32 rounded-full overflow-hidden flex items-center justify-center">
-            {chef.profile_image_url ? (
-              <img
-                src={chef.profile_image_url}
-                alt={`${chef.firstname} ${chef.lastname}`}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-white/20 flex items-center justify-center text-4xl font-bold">
-                {initials}
-              </div>
-            )}
+          <div className="w-32 h-32 rounded-full overflow-hidden">
+            <img
+              src={chef.profile_image_url}
+              alt={`${chef.firstname} ${chef.lastname}`}
+              className="w-full h-full object-cover"
+            />
           </div>
         </div>
 
