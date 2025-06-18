@@ -1,4 +1,7 @@
-import { ChefLocation, ChefProfile, FoodType } from "../../types/chefs.types";
+import { Badge } from "@/components/ui/Badge";
+import { Button } from "@/components/ui/Button";
+import { StatCard } from "@/components/ui/StatCard";
+import { ChefLocation, ChefProfile, FoodType } from "@/types/chefs.types";
 
 interface ChefProfileDetailsProps {
   chef: ChefProfile;
@@ -18,12 +21,14 @@ export function ChefProfileDetails({ chef }: ChefProfileDetailsProps) {
             <div className="space-y-4">
               <div className="flex flex-wrap gap-3">
                 {chef.food_types.map((foodType: FoodType) => (
-                  <span
+                  <Badge
                     key={foodType.id}
-                    className="inline-flex items-center px-4 py-2 rounded-full text-sm font-medium bg-blue-100 text-blue-800 border border-blue-200"
+                    variant="default"
+                    size="md"
+                    className="px-4 py-2 border border-blue-200"
                   >
                     🍽️ {foodType.name}
-                  </span>
+                  </Badge>
                 ))}
               </div>
 
@@ -108,32 +113,23 @@ export function ChefProfileDetails({ chef }: ChefProfileDetailsProps) {
         </h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="text-center p-6 bg-gradient-to-br from-yellow-50 to-yellow-100 rounded-lg border border-yellow-200">
-            <div className="text-3xl font-bold text-yellow-600 mb-2">
-              {chef.average_rating.toFixed(1)} ★
-            </div>
-            <div className="text-sm text-yellow-700 font-medium">
-              Note moyenne
-            </div>
-          </div>
+          <StatCard
+            title="Note moyenne"
+            value={`${chef.average_rating.toFixed(1)} ★`}
+            variant="yellow"
+          />
 
-          <div className="text-center p-6 bg-gradient-to-br from-green-50 to-green-100 rounded-lg border border-green-200">
-            <div className="text-3xl font-bold text-green-600 mb-2">
-              {chef.reviews_count}
-            </div>
-            <div className="text-sm text-green-700 font-medium">
-              Avis client{chef.reviews_count > 1 ? "s" : ""}
-            </div>
-          </div>
+          <StatCard
+            title={`Avis client${chef.reviews_count > 1 ? "s" : ""}`}
+            value={chef.reviews_count}
+            variant="green"
+          />
 
-          <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border border-blue-200">
-            <div className="text-3xl font-bold text-blue-600 mb-2">
-              {chef.food_types?.length || 0}
-            </div>
-            <div className="text-sm text-blue-700 font-medium">
-              Spécialité{(chef.food_types?.length || 0) > 1 ? "s" : ""}
-            </div>
-          </div>
+          <StatCard
+            title={`Spécialité${(chef.food_types?.length || 0) > 1 ? "s" : ""}`}
+            value={chef.food_types?.length || 0}
+            variant="blue"
+          />
         </div>
       </div>
 
@@ -146,9 +142,7 @@ export function ChefProfileDetails({ chef }: ChefProfileDetailsProps) {
           <p className="text-gray-600 mb-6">
             Contactez ce chef pour discuter de vos besoins culinaires
           </p>
-          <button className="bg-blue-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
-            Contacter le chef
-          </button>
+          <Button size="lg">Contacter le chef</Button>
         </div>
       </div>
     </div>

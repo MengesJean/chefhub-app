@@ -1,8 +1,8 @@
 "use client";
 
+import { ChefResponse } from "@/types/chefs.types";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ChefResponse } from "../types/chefs.types";
 
 interface PaginationProps {
   paginationData: ChefResponse;

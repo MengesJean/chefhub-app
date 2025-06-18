@@ -1,13 +1,13 @@
+import { getChefBySlug } from "@/actions/chefs.actions";
+import { ChefProfileDetails } from "@/components/complex/chef/ChefProfileDetails";
+import { ChefProfileHeader } from "@/components/complex/chef/ChefProfileHeader";
+import { ChefProfileNavigation } from "@/components/complex/chef/ChefProfileNavigation";
 import { notFound } from "next/navigation";
-import { getChefBySlug } from "../actions/chefs.action";
-import { ChefProfileDetails } from "./components/ChefProfileDetails";
-import { ChefProfileHeader } from "./components/ChefProfileHeader";
-import { ChefProfileNavigation } from "./components/ChefProfileNavigation";
 
 interface ChefProfilePageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function ChefProfilePage({

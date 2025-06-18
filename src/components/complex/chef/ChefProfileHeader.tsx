@@ -1,4 +1,6 @@
-import { ChefLocation, ChefProfile } from "../../types/chefs.types";
+import { Avatar } from "@/components/ui/Avatar";
+import { Rating } from "@/components/ui/Rating";
+import { ChefLocation, ChefProfile } from "@/types/chefs.types";
 
 interface ChefProfileHeaderProps {
   chef: ChefProfile;
@@ -7,58 +9,18 @@ interface ChefProfileHeaderProps {
 export function ChefProfileHeader({ chef }: ChefProfileHeaderProps) {
   const initials = `${chef.firstname.charAt(0)}${chef.lastname.charAt(0)}`;
 
-  // Fonction pour afficher les étoiles
-  const renderStars = (rating: number) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-
-    for (let i = 0; i < fullStars; i++) {
-      stars.push(
-        <span key={i} className="text-yellow-400 text-xl">
-          ★
-        </span>
-      );
-    }
-
-    if (hasHalfStar) {
-      stars.push(
-        <span key="half" className="text-yellow-400 text-xl">
-          ☆
-        </span>
-      );
-    }
-
-    const remainingStars = 5 - Math.ceil(rating);
-    for (let i = 0; i < remainingStars; i++) {
-      stars.push(
-        <span key={`empty-${i}`} className="text-gray-300 text-xl">
-          ☆
-        </span>
-      );
-    }
-
-    return stars;
-  };
-
   return (
     <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-12 text-white">
       <div className="flex flex-col md:flex-row items-center md:items-start space-y-6 md:space-y-0 md:space-x-8">
         {/* Avatar */}
         <div className="flex-shrink-0">
-          <div className="w-32 h-32 rounded-full overflow-hidden flex items-center justify-center">
-            {chef.profile_image_url ? (
-              <img
-                src={chef.profile_image_url}
-                alt={`${chef.firstname} ${chef.lastname}`}
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="w-full h-full bg-white/20 flex items-center justify-center text-4xl font-bold">
-                {initials}
-              </div>
-            )}
-          </div>
+          <Avatar
+            src={chef.profile_image_url}
+            alt={`${chef.firstname} ${chef.lastname}`}
+            initials={initials}
+            size="xl"
+            className="bg-white/20"
+          />
         </div>
 
         {/* Informations principales */}
@@ -97,14 +59,12 @@ export function ChefProfileHeader({ chef }: ChefProfileHeaderProps) {
 
           {/* Note et avis */}
           <div className="flex items-center justify-center md:justify-start space-x-4">
-            <div className="flex items-center space-x-2">
-              <div className="flex items-center space-x-1">
-                {renderStars(chef.average_rating)}
-              </div>
-              <span className="text-xl font-semibold">
-                {chef.average_rating.toFixed(1)}
-              </span>
-            </div>
+            <Rating
+              rating={chef.average_rating}
+              showValue
+              size="lg"
+              className="text-white"
+            />
 
             <div className="border-l border-white/30 pl-4">
               <span className="text-lg">{chef.reviews_count} avis</span>

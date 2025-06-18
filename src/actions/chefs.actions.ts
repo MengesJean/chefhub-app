@@ -1,6 +1,6 @@
 "use server";
 
-import { ChefProfile, ChefResponse } from "../types/chefs.types";
+import { ChefProfile, ChefResponse } from "@/types/chefs.types";
 
 export async function getChefs(page: number = 1): Promise<ChefResponse> {
   const response = await fetch(

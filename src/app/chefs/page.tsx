@@ -1,7 +1,8 @@
-import { getChefs } from "./actions/chefs.action";
-import { ChefsList } from "./components/ChefsList";
-import { Navigation } from "./components/Navigation";
-import { Pagination } from "./components/Pagination";
+import { getChefs } from "@/actions/chefs.actions";
+import { ChefsList } from "@/components/complex/chef/ChefsList";
+import { Navigation } from "@/components/complex/navigation/Navigation";
+import { Pagination } from "@/components/complex/navigation/Pagination";
+import { Title } from "@/components/ui/Title";
 
 interface ChefsPageProps {
   searchParams: Promise<{
@@ -20,17 +21,16 @@ export default async function ChefsPage({ searchParams }: ChefsPageProps) {
         <Navigation />
 
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">
+          <Title
+            level={1}
+            subtitle={`Découvrez tous nos chefs talentueux (${chefsData.total} chefs au total)`}
+          >
             Liste des Chefs
-          </h1>
-          <p className="text-gray-600">
-            Découvrez tous nos chefs talentueux ({chefsData.total} chefs au
-            total)
-          </p>
+          </Title>
         </div>
 
         <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <ChefsList chefs={chefsData} />
+          <ChefsList chefs={chefsData.data} />
           <Pagination paginationData={chefsData} />
         </div>
       </div>
