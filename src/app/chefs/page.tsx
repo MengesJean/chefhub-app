@@ -4,13 +4,14 @@ import { Navigation } from "./components/Navigation";
 import { Pagination } from "./components/Pagination";
 
 interface ChefsPageProps {
-  searchParams: {
+  searchParams: Promise<{
     page?: string;
-  };
+  }>;
 }
 
 export default async function ChefsPage({ searchParams }: ChefsPageProps) {
-  const currentPage = parseInt(searchParams.page || "1");
+  const { page } = await searchParams;
+  const currentPage = parseInt(page || "1");
   const chefsData = await getChefs(currentPage);
 
   return (

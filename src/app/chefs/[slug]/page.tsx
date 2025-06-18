@@ -15,7 +15,7 @@ export default async function ChefProfilePage({
 }: ChefProfilePageProps) {
   const { slug } = await params;
   const chef = await getChefBySlug(slug);
-  console.log(chef);
+
   if (!chef) {
     notFound();
   }
