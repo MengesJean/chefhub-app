@@ -2,6 +2,7 @@ import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { StatCard } from "@/components/ui/StatCard";
 import { ChefLocation, ChefProfile, FoodType } from "@/types/chefs.types";
+import { ChefGallery } from "./ChefGallery";
 
 interface ChefProfileDetailsProps {
   chef: ChefProfile;
@@ -106,13 +107,23 @@ export function ChefProfileDetails({ chef }: ChefProfileDetailsProps) {
         </div>
       </div>
 
+      {/* Galerie d'images */}
+      {chef.gallery_images && chef.gallery_images.length > 0 && (
+        <div className="mt-12 pt-8 border-t border-gray-200">
+          <ChefGallery
+            galleryImages={chef.gallery_images}
+            chefName={`${chef.firstname} ${chef.lastname}`}
+          />
+        </div>
+      )}
+
       {/* Section statistiques détaillées */}
       <div className="mt-12 pt-8 border-t border-gray-200">
         <h2 className="text-2xl font-bold text-gray-900 mb-6">
           Statistiques et réputation
         </h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <StatCard
             title="Note moyenne"
             value={`${chef.average_rating.toFixed(1)} ★`}
@@ -129,6 +140,12 @@ export function ChefProfileDetails({ chef }: ChefProfileDetailsProps) {
             title={`Spécialité${(chef.food_types?.length || 0) > 1 ? "s" : ""}`}
             value={chef.food_types?.length || 0}
             variant="blue"
+          />
+
+          <StatCard
+            title={`Photo${(chef.gallery_images_count || 0) > 1 ? "s" : ""}`}
+            value={chef.gallery_images_count || 0}
+            variant="default"
           />
         </div>
       </div>
