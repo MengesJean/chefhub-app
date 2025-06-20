@@ -1,5 +1,5 @@
 interface RatingProps {
-  rating: number;
+  rating: number | null | undefined;
   maxRating?: number;
   size?: "sm" | "md" | "lg";
   showValue?: boolean;
@@ -13,6 +13,8 @@ export function Rating({
   showValue = false,
   className = "",
 }: RatingProps) {
+  // Handle undefined/null rating
+  const safeRating = rating ?? 0;
   const sizeClasses = {
     sm: "text-sm",
     md: "text-base",
@@ -21,8 +23,8 @@ export function Rating({
 
   const renderStars = () => {
     const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
+    const fullStars = Math.floor(safeRating);
+    const hasHalfStar = safeRating % 1 !== 0;
 
     // Étoiles pleines
     for (let i = 0; i < fullStars; i++) {
@@ -43,7 +45,7 @@ export function Rating({
     }
 
     // Étoiles vides
-    const remainingStars = maxRating - Math.ceil(rating);
+    const remainingStars = maxRating - Math.ceil(safeRating);
     for (let i = 0; i < remainingStars; i++) {
       stars.push(
         <span key={`empty-${i}`} className="text-gray-300">
@@ -62,7 +64,7 @@ export function Rating({
       </div>
       {showValue && (
         <span className={`font-medium text-gray-900 ml-2 ${sizeClasses[size]}`}>
-          {rating.toFixed(1)}
+          {safeRating.toFixed(1)}
         </span>
       )}
     </div>

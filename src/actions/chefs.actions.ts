@@ -25,5 +25,6 @@ export async function getChefBySlug(slug: string): Promise<ChefProfile | null> {
     }
   );
   const chef = await response.json();
+  console.log(chef);
   return chef;
 }

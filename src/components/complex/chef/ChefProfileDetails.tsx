@@ -126,13 +126,13 @@ export function ChefProfileDetails({ chef }: ChefProfileDetailsProps) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
           <StatCard
             title="Note moyenne"
-            value={`${chef.average_rating.toFixed(1)} ★`}
+            value={`${(chef.average_rating ?? 0).toFixed(1)} ★`}
             variant="yellow"
           />
 
           <StatCard
-            title={`Avis client${chef.reviews_count > 1 ? "s" : ""}`}
-            value={chef.reviews_count}
+            title={`Avis client${(chef.reviews_count ?? 0) > 1 ? "s" : ""}`}
+            value={chef.reviews_count ?? 0}
             variant="green"
           />
 
