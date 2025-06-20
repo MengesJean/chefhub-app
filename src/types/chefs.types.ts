@@ -24,12 +24,12 @@ export interface GalleryImage {
 }
 
 export interface ChefProfile extends Chef {
-  locations: ChefLocation[];
-  food_types: FoodType[];
-  average_rating: number;
-  reviews_count: number;
-  gallery_images?: GalleryImage[];
-  gallery_images_count?: number;
+  locations?: ChefLocation[] | null;
+  food_types?: FoodType[] | null;
+  average_rating?: number | null;
+  reviews_count?: number | null;
+  gallery_images?: GalleryImage[] | null;
+  gallery_images_count?: number | null;
 }
 
 export interface FoodType {

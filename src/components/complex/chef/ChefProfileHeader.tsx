@@ -51,9 +51,11 @@ export function ChefProfileHeader({ chef }: ChefProfileHeaderProps) {
               />
             </svg>
             <span className="text-lg">
-              {chef.locations
-                .map((location: ChefLocation) => location.city_name)
-                .join(", ")}
+              {chef.locations && chef.locations.length > 0
+                ? chef.locations
+                    .map((location: ChefLocation) => location.city_name)
+                    .join(", ")
+                : "Non spécifié"}
             </span>
           </div>
 
